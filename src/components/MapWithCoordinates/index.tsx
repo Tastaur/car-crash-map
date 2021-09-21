@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite';
 import { MapView } from './MapView';
 import { getCarCrashStore } from '../../store/CarCrashEventStore';
 import { Coordinate } from './types';
-import '../../../ant-theme-vars.less';
 import { CoordinatesModal } from '../CoordintasModal';
 
 
