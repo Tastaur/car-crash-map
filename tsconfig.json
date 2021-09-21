@@ -1,0 +1,33 @@
+{
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "lib": [
+      "esnext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "outDir": "app",
+    "jsx": "react",
+    "module": "ESNext",
+    "baseUrl": "src",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es6",
+    "noUncheckedIndexedAccess": true,
+    "strictPropertyInitialization": false,
+    "noEmitOnError": false
+  }
+}
