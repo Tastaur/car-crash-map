@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import moment from 'moment';
 
 import { Coordinate } from '../../../components/MapWithCoordinates/types';
 import { CAR_CRASH_AFFECT_TYPE, CAR_CRASH_TYPE, GET_CAR_CRASH_DESCRIPTION } from './types';
@@ -8,7 +9,7 @@ export class CarCrashEvent {
   coordinate: Coordinate | null = null;
   affectedPeopleAmount: number = 0;
   deathPeopleAmount: number = 0;
-  carAmount: number = 0;
+  practiciansAmount: number = 0;
   eventDescription: string = '';
   eventDate: Date = new Date();
   eventTime: Date = new Date();
@@ -33,8 +34,8 @@ export class CarCrashEvent {
     this.deathPeopleAmount = amount;
   };
 
-  setCarAmount = (amount: number) => {
-    this.carAmount = amount;
+  setPracticiansAmount = (amount: number) => {
+    this.practiciansAmount = amount;
   };
 
   setDescription = (description: string) => {
@@ -78,5 +79,9 @@ export class CarCrashEvent {
       return `${this.affectedPeopleAmount}`;
     }
     return '';
+  }
+
+  get dateToString() {
+    return `${moment(this.eventDate).format('DD.MM.YYYY')} ${moment(this.eventTime).format('HH:mm')}`;
   }
 }

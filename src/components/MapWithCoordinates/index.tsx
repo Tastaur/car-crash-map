@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { MapView } from './MapView';
@@ -7,18 +7,22 @@ import { Coordinate } from './types';
 import { CoordinatesModal } from '../CoordintasModal';
 
 
-export const MapWithCoordinates = observer(() => {
-  const { getCarCrashList, addCarCrashEvent, chosenCarCrash, setChosenCarCrash } = getCarCrashStore();
+interface IProps {
+  readOnly?: boolean,
+}
+
+export const MapWithCoordinates: FC<IProps> = observer(({ readOnly }) => {
+  const { carCrashList, addCarCrashEvent, chosenCarCrash, setChosenCarCrash } = getCarCrashStore();
   const [pickedCoords, setPickedCoords] = useState<Coordinate | null>(null);
 
   return (
     <div>
       <MapView
         chosePlayMarker={setChosenCarCrash}
-        allMarks={getCarCrashList}
+        allMarks={carCrashList}
         setPickedCoords={(coords) => setPickedCoords(coords)}
       />
-      {pickedCoords || chosenCarCrash ? (
+      {!readOnly && (pickedCoords || chosenCarCrash) ? (
         <CoordinatesModal
           eventId={chosenCarCrash}
           isOpen={Boolean(pickedCoords || chosenCarCrash)}

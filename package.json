@@ -8,7 +8,9 @@
     "build:dev": "webpack --config config/webpack/config.dev.js --color",
     "build:prod": "webpack --config config/webpack/config.prod.js --color",
     "start:dev": "webpack serve --config config/webpack/config.dev.js --color",
-    "start:prod": "webpack serve --config config/webpack/config.prod.js --color "
+    "start:prod": "webpack serve --config config/webpack/config.prod.js --color ",
+    "lint": "eslint src --ext .js,.ts,.tsx --ignore-path .gitignore --cache --color",
+    "ts": "tsc"
   },
   "eslintIgnore": [
     "node_modules"

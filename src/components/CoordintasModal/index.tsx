@@ -28,8 +28,8 @@ export const CoordinatesModal: FC<IProps> = observer(({
   const currentItem = useMemo(() => getCarCrashById(eventId) || new CarCrashEvent(generateId()), [eventId]);
   const {
     id,
-    carAmount,
-    setCarAmount,
+    practiciansAmount,
+    setPracticiansAmount,
     deathPeopleAmount,
     affectedPeopleAmount,
     setAffectedPeopleAmount,
@@ -116,8 +116,8 @@ export const CoordinatesModal: FC<IProps> = observer(({
           <InputNumber
             type="number"
             min={0}
-            value={carAmount}
-            onChange={setCarAmount}
+            value={practiciansAmount}
+            onChange={setPracticiansAmount}
           />
         </div>
         <div>

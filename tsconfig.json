@@ -1,4 +1,5 @@
 {
+  "include": [ "./src/" , "./config/"],
   "exclude": [
     "**/node_modules",
     "**/.*/"
@@ -10,7 +11,7 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "outDir": "app",
+    "outDir": "./build/",
     "jsx": "react",
     "module": "ESNext",
     "baseUrl": "src",
