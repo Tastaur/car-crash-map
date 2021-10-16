@@ -27,6 +27,10 @@ module.exports = {
                     to: path.join(process.cwd(), './build')
                 },
                 {
+                    from: path.join(process.cwd(), 'src/app.css'),
+                    to: path.join(process.cwd(), './build')
+                },
+                {
                     from: path.join(process.cwd(), 'node_modules/antd/dist/antd.css'),
                     to: path.join(process.cwd(), './build/main.css')
                 },

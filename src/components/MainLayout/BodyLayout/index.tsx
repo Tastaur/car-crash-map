@@ -14,11 +14,7 @@ const BodyLayout = () => {
     [PAGE_NAMES.STATISTIC]: <div></div>,
     [PAGE_NAMES.EVENT_LIST]: <EventListPage />,
   };
-  return (
-    <div>
-      {PAGES[currentPage]}
-    </div>
-  );
+  return PAGES[currentPage];
 };
 
 export default observer(BodyLayout);

@@ -13,5 +13,5 @@ export const getInvalidateFromFields = (formData: IRequiredFields) => {
       acc[key] = 'Необходимо заполнить поле';
     }
     return acc;
-  }, {});
+  }, {} as IRequiredFields);
 };

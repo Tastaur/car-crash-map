@@ -7,8 +7,9 @@ import { getCarCrashStore } from '../../store/CarCrashEventStore';
 import { CarCrashEvent } from '../../store/CarCrashEventStore/CarCrashEvent/CarCrashEvent';
 import CarCrashEventForm from '../CarCrashEventForm';
 import { generateId } from '../../utils/generateId';
+import { getInvalidateFromFields, IRequiredFields } from '../CarCrashEventForm/utils';
 
-// todo add save fn
+
 interface IProps {
   isOpen: boolean,
   setPickedCoords?: (coord: Coordinate | null) => void,
@@ -44,6 +45,7 @@ const CoordinatesModal: FC<IProps> = ({
   const [affectedAmount, setAffectedAmount] = useState(affectedPeopleAmount);
   const [deathAmount, setDeathAmount] = useState(deathPeopleAmount);
   const [eventDistrict, setEventDistrict] = useState(district);
+  const [error, setError] = useState<IRequiredFields | null>(null);
   const closeModal = () => {
     setPickedCoords && setPickedCoords(null);
     setChosenCarCrash('');
@@ -54,18 +56,28 @@ const CoordinatesModal: FC<IProps> = ({
   }
 
   const onOkHandler = () => {
-    setData({
+    const invalidateFields = getInvalidateFromFields({
       coordinate,
       eventDescription: description,
-      eventTime: time,
-      eventDate: date,
-      carCrashType: type,
       practiciansAmount: practicians,
-      affectedPeopleAmount: affectedAmount,
-      deathPeopleAmount: deathAmount,
-      district: eventDistrict,
     });
-    closeModal();
+    const hasInvalidationFields = Boolean(Object.keys(invalidateFields).length);
+    if (hasInvalidationFields) {
+      setError(invalidateFields);
+    } else {
+      setData({
+        coordinate,
+        eventDescription: description,
+        eventTime: time,
+        eventDate: date,
+        carCrashType: type,
+        practiciansAmount: practicians,
+        affectedPeopleAmount: affectedAmount,
+        deathPeopleAmount: deathAmount,
+        district: eventDistrict,
+      });
+      closeModal();
+    }
   };
 
   const onCancelHandler = () => {
@@ -85,6 +97,7 @@ const CoordinatesModal: FC<IProps> = ({
       onOk={onOkHandler}
     >
       <CarCrashEventForm
+        error={error}
         district={eventDistrict}
         setDistrict={setEventDistrict}
         affectedAmount={affectedAmount}

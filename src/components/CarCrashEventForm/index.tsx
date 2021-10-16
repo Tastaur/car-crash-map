@@ -10,9 +10,10 @@ import {
   CAR_CRASH_TYPE,
   GET_CAR_CRASH_DESCRIPTION, GET_CAR_CRASH_DISTRICT_NAME,
 } from '../../store/CarCrashEventStore/CarCrashEvent/types';
+import { IRequiredFields } from './utils';
 
 
-interface IProps {
+export interface IFormProps {
   description: string,
   setDescription: (desc: string) => void,
   time: Date,
@@ -30,6 +31,7 @@ interface IProps {
   district: CAR_CRASH_DISTRICT_TYPE,
   setDistrict: (type: CAR_CRASH_DISTRICT_TYPE) => void,
   readOnly?: boolean,
+  error: IRequiredFields | null,
 }
 
 const CarCrashEventForm = ({
@@ -50,7 +52,8 @@ const CarCrashEventForm = ({
   setDeathAmount,
   setDistrict,
   district,
-}: IProps) => {
+  error,
+}: IFormProps) => {
   return (
     <Space direction="vertical" size="middle" style={{ width: '100%' }}>
       <div>
@@ -62,6 +65,13 @@ const CarCrashEventForm = ({
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
+        {error?.eventDescription ? (
+          <Typography.Text
+            type="danger"
+          >
+            {error.eventDescription}
+          </Typography.Text>
+        ) : null}
       </div>
       <div>
         <Typography>Тип ДТП: </Typography>
@@ -110,7 +120,7 @@ const CarCrashEventForm = ({
         <InputNumber
           disabled={readOnly}
           type="number"
-          min={0}
+          min={1}
           value={practicians}
           onChange={setPracticians}
         />
