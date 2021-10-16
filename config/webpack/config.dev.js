@@ -11,23 +11,24 @@ const pluginsConfig = require('./plugins/plugins.config.dev');
 const entryPath = path.join(process.cwd(), 'src/index.tsx');
 const outputPath = path.join(process.cwd(), 'build');
 
-
 module.exports = webpackMerge(
-  resolveConfig,
-  rulesConfig,
-  optimiztaionConfig,
-  serverConfig,
-  pluginsConfig,
-  {
-    context: path.resolve(__dirname, 'src'),
-    mode: 'development',
-    devtool: 'source-map',
-    entry: {
-      main: ['@babel/polyfill', entryPath],
+    resolveConfig,
+    rulesConfig,
+    optimiztaionConfig,
+    serverConfig,
+    pluginsConfig,
+    {
+        mode: 'development',
+        devtool: 'source-map',
+        target: 'web',
+        entry: {
+            main: ['@babel/polyfill', entryPath],
+            hot: 'webpack/hot/dev-server.js',
+            client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+        },
+        output: {
+            filename: '[name].[contenthash].js',
+            path: outputPath,
+        },
     },
-    output: {
-      filename: '[name].[contenthash].js',
-      path: outputPath,
-    },
-  },
 );

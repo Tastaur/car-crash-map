@@ -8,7 +8,7 @@ class AppState {
     makeAutoObservable(this);
   }
 
-  currentPage: PAGE_NAMES = PAGE_NAMES.EVENT_LIST;
+  currentPage: PAGE_NAMES = PAGE_NAMES.CREATE;
 
   setCurrentPage = (page: PAGE_NAMES) => {
     this.currentPage = page;

@@ -1,15 +1,23 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
     module: {
         rules: [
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', {
+                use: ['style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: "[path]__[local]",
+                        },
+                    }
+                }, {
                     loader: 'less-loader',
                     options: {
                         lessOptions: {
                             javascriptEnabled: true,
+                            modules: {
+                                localIdentName: "[path]__[local]",
+                            },
                         },
                     },
                 }]
@@ -19,7 +27,10 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     plugins: [
-                        ['import', {libraryName: "antd", style: true}]
+                        ['import', {
+                            libraryName: "antd",
+                            style: true
+                        }]
                     ]
                 }
             },
@@ -29,7 +40,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", MiniCssExtractPlugin.loader, 'css-loader'],
+                use: ['style-loader', {
+                    loader: 'css-loader', options: {
+                        modules: {
+                            localIdentName: "[path]__[local]",
+                        },
+                    }
+                },],
             },
             {
                 test: /\.xml$/i,

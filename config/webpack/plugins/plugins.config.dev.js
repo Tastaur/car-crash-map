@@ -26,6 +26,10 @@ module.exports = {
                     from: path.join(process.cwd(), 'src/favicon.ico'),
                     to: path.join(process.cwd(), './build')
                 },
+                {
+                    from: path.join(process.cwd(), 'node_modules/antd/dist/antd.css'),
+                    to: path.join(process.cwd(), './build/main.css')
+                },
             ],
         }),
     ],

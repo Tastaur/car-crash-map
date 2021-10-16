@@ -1,3 +1,12 @@
+import { Coordinate } from '../../../components/EventListPage/MapWithCoordinates/types';
+
+
+export enum CAR_CRASH_DISTRICT_TYPE {
+  AUTO = 'auto',
+  CENTER = 'center',
+  KOMSA = 'komsa',
+}
+
 export enum CAR_CRASH_AFFECT_TYPE {
   WITH_DEATH = 'withDeath',
   WITH_AFFECTED = 'withAffected',
@@ -38,3 +47,20 @@ export const GET_CAR_CRASH_DESCRIPTION: Record<CAR_CRASH_TYPE, string> = {
   [CAR_CRASH_TYPE.ANIMAL]: 'ДТП с животными',
   [CAR_CRASH_TYPE.BICYCLE]: 'ДТП с велосипедистами',
 };
+export const GET_CAR_CRASH_DISTRICT_NAME: Record<CAR_CRASH_DISTRICT_TYPE, string> = {
+  [CAR_CRASH_DISTRICT_TYPE.CENTER]: 'Центральный район',
+  [CAR_CRASH_DISTRICT_TYPE.AUTO]: 'Автозаводский район',
+  [CAR_CRASH_DISTRICT_TYPE.KOMSA]: 'Комсомольский район',
+};
+
+export interface ICarCrashEventPayload {
+  coordinate: Coordinate,
+  affectedPeopleAmount: number,
+  deathPeopleAmount: number,
+  practiciansAmount: number,
+  eventDescription: string,
+  eventDate: Date,
+  eventTime: Date,
+  carCrashType: CAR_CRASH_TYPE,
+  district: CAR_CRASH_DISTRICT_TYPE,
+}

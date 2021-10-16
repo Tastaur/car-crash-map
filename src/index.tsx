@@ -10,7 +10,8 @@ render(<App />, document.getElementById('root'));
 if (module.hot) {
   // @ts-ignore
   module.hot.accept('./App', () => {
-    const UpdatedAppRoot = require('./App').default; // eslint-disable-line global-require
+    // eslint-disable-next-line global-require
+    const UpdatedAppRoot = require('./App').default;
     render(<UpdatedAppRoot />, document.getElementById('root'));
   });
 }

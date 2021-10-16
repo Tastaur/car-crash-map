@@ -1,10 +1,9 @@
 import React from 'react';
-import '../ant-theme-vars.less';
 import { YMaps } from 'react-yandex-maps';
 import { ConfigProvider } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 
-import { MainLayout } from './components/MainLayout';
+import MainLayout from './components/MainLayout';
 
 
 export const App = () => {
@@ -22,5 +21,3 @@ export const App = () => {
     </ConfigProvider>
   );
 };
-
-

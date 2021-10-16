@@ -1,16 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { MapWithCoordinates } from '../../MapWithCoordinates';
 import { getAppState } from '../../../store/AppState';
 import { PAGE_NAMES } from '../../../store/AppState/types';
-import { EventListPage } from '../../EventListPage';
+import EventListPage from '../../EventListPage';
+import CreatePage from '../../CreatePage';
 
 
-export const BodyLayout = observer(() => {
+const BodyLayout = () => {
   const { currentPage } = getAppState();
   const PAGES: Record<PAGE_NAMES, JSX.Element> = {
-    [PAGE_NAMES.CREATE]: <MapWithCoordinates />,
+    [PAGE_NAMES.CREATE]: <CreatePage />,
     [PAGE_NAMES.STATISTIC]: <div></div>,
     [PAGE_NAMES.EVENT_LIST]: <EventListPage />,
   };
@@ -19,4 +19,6 @@ export const BodyLayout = observer(() => {
       {PAGES[currentPage]}
     </div>
   );
-});
+};
+
+export default observer(BodyLayout);

@@ -1,14 +1,14 @@
-import { ColumnsType } from 'antd/lib/table/interface';
-import { Badge, Typography } from 'antd';
-import React from 'react';
 import { AlignType } from 'rc-table/lib/interface';
 import { PresetStatusColorType } from 'antd/lib/_util/colors';
+import { ColumnsType } from 'antd/lib/table/interface';
+import { Badge, Button, Typography } from 'antd';
+import React from 'react';
 
-import { CAR_CRASH_AFFECT_TYPE } from '../../../store/CarCrashEventStore/CarCrashEvent/types';
 import { EVENT_TABLE_COLUMN, IRowItem } from './types';
+import { CAR_CRASH_AFFECT_TYPE } from '../../../store/CarCrashEventStore/CarCrashEvent/types';
 
 
-const getBaseColumnData = (key: EVENT_TABLE_COLUMN) => {
+export const getBaseColumnData = (key: EVENT_TABLE_COLUMN) => {
   return {
     align: 'left' as AlignType,
     dataIndex: key,
@@ -16,11 +16,10 @@ const getBaseColumnData = (key: EVENT_TABLE_COLUMN) => {
   };
 };
 
-const GET_BADGE_STATUS: Record<CAR_CRASH_AFFECT_TYPE, PresetStatusColorType> = {
+export const GET_BADGE_STATUS: Record<CAR_CRASH_AFFECT_TYPE, PresetStatusColorType> = {
   [CAR_CRASH_AFFECT_TYPE.WITHOUT_AFFECTED_PEOPLE]: 'success',
   [CAR_CRASH_AFFECT_TYPE.WITH_AFFECTED]: 'warning',
   [CAR_CRASH_AFFECT_TYPE.WITH_DEATH]: 'error',
-
 };
 
 export const columns: ColumnsType<IRowItem> = [
@@ -60,5 +59,15 @@ export const columns: ColumnsType<IRowItem> = [
   {
     ...getBaseColumnData(EVENT_TABLE_COLUMN.DEATH_AMOUNT),
     title: 'Колличество погибших',
+  },
+  {
+    ...getBaseColumnData(EVENT_TABLE_COLUMN.ACTION),
+    render: (onInfo: () => void) => {
+      return (
+        <Button onClick={onInfo}>
+          Редактировать
+        </Button>
+      );
+    },
   },
 ];

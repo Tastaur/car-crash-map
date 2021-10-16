@@ -1,7 +1,7 @@
 module.exports ={
     resolve: {
         modules: [
-            'app',
+            'src',
             'node_modules',
         ],
         extensions: ['.js', '.jsx', '.json', '.css', '.less', '.ts', '.tsx'],

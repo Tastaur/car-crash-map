@@ -7,8 +7,9 @@ import { menuPages } from './config';
 import { PAGE_NAMES } from '../../../store/AppState/types';
 
 
-export const HeaderMenu = observer(() => {
+const HeaderMenu = () => {
   const { setCurrentPage, currentPage } = getAppState();
+
   return (
     <Menu
       onClick={event => {
@@ -25,4 +26,6 @@ export const HeaderMenu = observer(() => {
       ))}
     </Menu>
   );
-});
+};
+
+export default observer(HeaderMenu);

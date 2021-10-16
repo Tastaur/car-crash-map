@@ -9,6 +9,7 @@ export enum EVENT_TABLE_COLUMN {
   DEATH_AMOUNT = 'death_amount',
   PRACTICIANS_COUNT = 'practicians_count',
   DATE = 'time',
+  ACTION = 'action',
 }
 
 export interface IRowItem {
@@ -20,4 +21,5 @@ export interface IRowItem {
   [EVENT_TABLE_COLUMN.AFFECTED_AMOUNT]: number,
   [EVENT_TABLE_COLUMN.DEATH_AMOUNT]: number,
   [EVENT_TABLE_COLUMN.DATE]: string,
+  [EVENT_TABLE_COLUMN.ACTION]: () => void,
 }
