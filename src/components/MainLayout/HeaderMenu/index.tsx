@@ -1,26 +1,23 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { observer } from 'mobx-react-lite';
+import { useLocation, useHistory } from 'react-router-dom';
 
-import { getAppState } from '../../../store/AppState';
 import { menuPages } from './config';
-import { PAGE_NAMES } from '../../../store/AppState/types';
 
 
-const HeaderMenu = () => {
-  const { setCurrentPage, currentPage } = getAppState();
-
+export const HeaderMenu = () => {
+  const history = useHistory();
+  const { pathname } = useLocation();
   return (
     <Menu
       onClick={event => {
-        setCurrentPage(event.key as PAGE_NAMES);
+        history.push(event.key);
       }}
-      selectedKeys={[currentPage]}
-      defaultValue={currentPage}
+      selectedKeys={[pathname.slice(1)]}
       mode="horizontal"
     >
-      {menuPages.map(({ title, key, disable }) => (
-        <Menu.Item key={key} disabled={disable}>
+      {menuPages.map(({ title, key }) => (
+        <Menu.Item key={key}>
           {title}
         </Menu.Item>
       ))}
@@ -28,4 +25,3 @@ const HeaderMenu = () => {
   );
 };
 
-export default observer(HeaderMenu);

@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
 import { Button, Typography } from 'antd';
+import { observer } from 'mobx-react-lite';
 
 import CarCrashEventForm, { IFormProps } from '../../CarCrashEventForm';
 import * as styles from './styles.less';
 
 
 interface IProps extends IFormProps {
-  onSubmit: () => void,
   onClear: () => void,
+  onSaveHandler: () => void,
 }
 
-export const CreateForm: FC<IProps> = ({
+export const CreateForm: FC<IProps> = observer(({
   readOnly,
+  onSaveHandler,
   description,
   setDescription,
   time,
@@ -27,7 +29,6 @@ export const CreateForm: FC<IProps> = ({
   deathAmount, setDeathAmount,
   setDistrict,
   district,
-  onSubmit,
   onClear,
   error,
 }) => {
@@ -55,10 +56,10 @@ export const CreateForm: FC<IProps> = ({
         readOnly={readOnly}
       />
       <div>
-        <Button type="primary" onClick={onSubmit}> Сохранить </Button>
+        <Button type="primary" onClick={onSaveHandler}> Сохранить </Button>
         <Button onClick={onClear}> Очистить </Button>
       </div>
 
     </div>
   );
-};
+});

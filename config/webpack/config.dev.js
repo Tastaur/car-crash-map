@@ -19,15 +19,13 @@ module.exports = webpackMerge(
     pluginsConfig,
     {
         mode: 'development',
-        devtool: 'source-map',
+        devtool: 'eval-source-map',
         target: 'web',
         entry: {
             main: ['@babel/polyfill', entryPath],
-            hot: 'webpack/hot/dev-server.js',
-            client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
         },
         output: {
-            filename: '[name].[contenthash].js',
+            filename: '[name].js',
             path: outputPath,
         },
     },

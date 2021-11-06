@@ -1,22 +1,19 @@
 import React, { FC } from 'react';
 import { Table } from 'antd';
+import { observer } from 'mobx-react-lite';
 
 import { columns } from './columns';
-import { IRowItem } from './types';
 import CoordinatesModal from '../../CoordintasModal';
+import { getCarCrashStore } from '../../../store/CarCrashEventStore';
 
 
-interface IProps {
-  carCrashList: Array<IRowItem>,
-  chosenCarCrash: string,
-}
-
-const EventTable: FC<IProps> = ({ carCrashList, chosenCarCrash }) => {
+const EventTable: FC = () => {
+  const { carCrashListForTable, chosenCarCrash } = getCarCrashStore();
   return (
     <div className="wrapper">
       <Table
         columns={columns}
-        dataSource={carCrashList}
+        dataSource={carCrashListForTable}
         pagination={{ hideOnSinglePage: true, pageSize: 10 }}
       />
       {chosenCarCrash
@@ -30,4 +27,4 @@ const EventTable: FC<IProps> = ({ carCrashList, chosenCarCrash }) => {
   );
 };
 
-export default EventTable;
+export default observer(EventTable);

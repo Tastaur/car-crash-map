@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Map, Placemark } from 'react-yandex-maps';
+import { Map, Placemark, YMaps } from 'react-yandex-maps';
 import { Typography } from 'antd';
 
 import { mapState } from 'globalConstants';
@@ -21,7 +21,12 @@ export const MapForForm: FC<IProps> = ({
   error,
 }) => {
   return (
-    <div>
+    <YMaps
+      query={{
+        lang: 'ru_RU',
+        apikey: '0fed4748-3e5a-4a8c-8fb3-1b146724f891',
+      }}
+    >
       <Map
         className={styles.default.map}
         onClick={e => setCoordinate(e.get('coords'))}
@@ -41,6 +46,6 @@ export const MapForForm: FC<IProps> = ({
         }
       </Map>
       {error ? <Typography.Text type="danger">{error.coordinate}</Typography.Text> : null}
-    </div>
+    </YMaps>
   );
 };

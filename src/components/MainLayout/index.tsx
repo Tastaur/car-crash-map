@@ -1,7 +1,7 @@
 import React from 'react';
 
-import HeaderMenu from './HeaderMenu';
-import BodyLayout from './BodyLayout';
+import { HeaderMenu } from './HeaderMenu';
+import { BodyLayout } from './BodyLayout';
 
 
 const MainLayout = () => {

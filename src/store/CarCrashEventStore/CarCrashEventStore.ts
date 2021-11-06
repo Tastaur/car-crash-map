@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 
 import { CarCrashEvent } from './CarCrashEvent/CarCrashEvent';
 import { EVENT_TABLE_COLUMN, IRowItem } from '../../components/EventListPage/EventTable/types';
-import { CAR_CRASH_DISTRICT_TYPE, ICarCrashEventPayload } from './CarCrashEvent/types';
+import { CAR_CRASH_DISTRICT_TYPE, GET_CAR_CRASH_DISTRICT_NAME, ICarCrashEventPayload } from './CarCrashEvent/types';
 import { generateId } from '../../utils/generateId';
 import { defaultData } from './_mock_';
 
@@ -52,6 +52,21 @@ class CarCrashEventStore {
   getCarCrashByDistrict = (district: CAR_CRASH_DISTRICT_TYPE) => {
     return this.carCrashList.filter(item => item.district === district);
   };
+
+  get getCarCrashStatisticByDistricts() {
+    const data = new Map<CAR_CRASH_DISTRICT_TYPE, Array<CarCrashEvent>>();
+    Object.values(CAR_CRASH_DISTRICT_TYPE).forEach(district => {
+      data.set(district, this.getCarCrashByDistrict(district));
+    });
+    return Array.from(data.entries()).map(([district, items]) => {
+      return {
+        name: GET_CAR_CRASH_DISTRICT_NAME[district],
+        deathAmount: items.filter(item => item.deathPeopleAmount > 0).length,
+        amount: items.length,
+        affectedAmount: items.filter(item => item.affectedPeopleAmount > 0 && 0 === item.deathPeopleAmount).length,
+      };
+    });
+  }
 }
 
 export const carCrashStore = new CarCrashEventStore();

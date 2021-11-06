@@ -1,10 +1,11 @@
 {
   "include": [ "./src/" , "./config/"],
   "exclude": [
-    "**/node_modules",
+    "node_modules",
     "**/.*/"
   ],
   "compilerOptions": {
+    "skipLibCheck": true,
     "experimentalDecorators": true,
     "lib": [
       "esnext",

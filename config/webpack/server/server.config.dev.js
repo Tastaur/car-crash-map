@@ -1,8 +1,10 @@
 module.exports = {
     devServer: {
-        port: 1488,
+        host: '0.0.0.0',
+        port: 19333,
         open: true,
-        hot: false,
+        hot: true,
         client: false,
+        historyApiFallback: true,
     },
 }

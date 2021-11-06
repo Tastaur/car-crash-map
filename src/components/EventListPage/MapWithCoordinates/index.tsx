@@ -1,23 +1,28 @@
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 
 import { MapView } from './MapView';
 import CoordinatesModal from '../../CoordintasModal';
 import * as style from './style.less';
+import { getCarCrashStore } from '../../../store/CarCrashEventStore';
 
 
 interface IProps {
   readOnly?: boolean,
-  chosenCarCrash: string,
-  setChosenCarCrash: (id: string) => void,
 }
 
-const MapWithCoordinates: FC<IProps> = ({ readOnly, chosenCarCrash, setChosenCarCrash }) => {
+const MapWithCoordinates: FC<IProps> = ({ readOnly }) => {
+  const { chosenCarCrash, setChosenCarCrash, carCrashList } = getCarCrashStore();
+
   return (
     <div className={style.default.wrapper}>
-      <MapView
-        chosePlayMarker={setChosenCarCrash}
-        className={style.default.map}
-      />
+      {carCrashList.length ? (
+        <MapView
+          chosePlayMarker={setChosenCarCrash}
+          className={style.default.map}
+          carCrashList={carCrashList}
+        />
+      ) : <div>Список пуст</div>}
       {chosenCarCrash ? (
         <CoordinatesModal
           readOnly={readOnly}
@@ -29,4 +34,4 @@ const MapWithCoordinates: FC<IProps> = ({ readOnly, chosenCarCrash, setChosenCar
   );
 };
 
-export default MapWithCoordinates;
+export default observer(MapWithCoordinates);
